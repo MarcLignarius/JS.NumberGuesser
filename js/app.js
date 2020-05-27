@@ -8,7 +8,7 @@
 // Game values
 let min = 1,
   max = 10,
-  winningNum = 2,
+  winningNum = getRandomNum(min, max),
   guessesLeft = 3;
 
 // UI elements
@@ -68,12 +68,14 @@ guessBtn.addEventListener('click', function () {
 // Is game over
 function gameOver(won, msg) {
   let color;
-  won === true ? (color = 'medium solid green') : (color = 'medium solid red');
+  won === true
+    ? ((borderStyle = 'medium solid green'), (color = 'green'))
+    : ((borderStyle = 'medium solid red'), (color = 'red'));
   // Disable input
-  guessInput.disabled;
+  guessInput.disabled = true;
 
   // Change border color
-  guessInput.style.border = color;
+  guessInput.style.border = borderStyle;
 
   // Set text color
   message.style.color = color;
@@ -90,4 +92,9 @@ function gameOver(won, msg) {
 function setMessage(msg, color) {
   message.style.color = color;
   message.textContent = msg;
+}
+
+// Get Winning Number
+function getRandomNum(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
